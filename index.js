@@ -39,6 +39,14 @@ module.exports = function gulpPug(options) {
         return cb(new PluginError('gulp-pug', e));
       }
     }
+    if (isInclude(file.path) && opts.renderIncludes === false) {
+      file = null;
+    }
     cb(null, file);
   });
 };
+
+function isInclude(path) {
+  let arr = path.split('/');
+  return arr[arr.length-1][0] === "_";
+}
