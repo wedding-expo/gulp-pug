@@ -54,5 +54,5 @@ function isInclude(path) {
 
 function shouldBeClient(opts) {
   let arr = opts.filename.split('.');
-  return opts.client || arr[arr.length-2][0] === 'js';
+  return opts.client || arr[arr.length-2] === 'js';
 }
