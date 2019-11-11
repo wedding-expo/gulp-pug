@@ -16,6 +16,7 @@ module.exports = function gulpPug(options) {
     const data = Object.assign({}, opts.data, file.data || {});
 
     opts.filename = file.path;
+    opts.client = shouldBeClient(opts)
     file.path = ext(file.path, opts.client ? '.js' : '.html');
 
     if (file.isStream()) {
@@ -48,5 +49,10 @@ module.exports = function gulpPug(options) {
 
 function isInclude(path) {
   let arr = path.split('/');
-  return arr[arr.length-1][0] === "_";
+  return arr[arr.length-1][0] === '_';
+}
+
+function shouldBeClient(opts) {
+  let arr = opts.filename.split('.');
+  return opts.client || arr[arr.length-2][0] === 'js';
 }
